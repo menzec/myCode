@@ -8,7 +8,7 @@ import os
 import arcpy
 import pdb
 from arcpy import env
-
+import random
 env.workspace = r"D:\NGCC\zheng\men"
 
 
@@ -43,21 +43,21 @@ def choose_num_list(dict_info, num):
                     num_list.append(coor)
                     # print('append')
                     start = interval + coor[1][1]
-    while abs(len(num_list) - num) > num * 0.05:
+    while abs(len(num_list) - num) > num * 0.02:
         num_list = []
         test_choose()
         print('num_list:%d,interval:%f' % (len(num_list), interval))
-        interval = interval * float(len(num_list)) / float(num)
+        interval = interval * float(len(num_list)) / float(num)*random.uniform(0.8,1.2)
     return num_list
 
 
-def random_get_feature(input_shp, get_num):
+def random_get_feature(input_shp,out_name, get_num):
     num = 0
     count = 0
     # create new shp
     # Set local variables
     out_path = r"D:\NGCC\zheng\men"
-    out_name = "randomchoose.shp"
+    # out_name = "randomchoose.shp"
     geometry_type = "POLYGON"
     template = input_shp
     has_m = "DISABLED"
@@ -126,12 +126,10 @@ def select_feature_from_points(point_file, input_shp, append_shape):
             point_list.append(info)
     print('add %d points!' % (len(point_list)))
     count = 0
-    pdb.set_trace()
     for row in data:
         if row[2] in point_list:
             new_shp.insertRow(row)
             count += 1
-            print(row)
     print('add %d points actually!' % (count))
     print('finished!')
 
@@ -139,9 +137,10 @@ def select_feature_from_points(point_file, input_shp, append_shape):
 def main():
     print('main process')
     input_shp = r'D:\NGCC\zheng\men\complete_within.shp'
+    out_name = 'target_527.shp'
     append_file = r'D:\NGCC\zheng\men\append01.txt'
     append_shape = r'D:\NGCC\zheng\men\randomchoose.shp'
-    # random_get_feature(input_shp, 450)
+    # random_get_feature(input_shp,out_name, 800)
     select_feature_from_points(append_file, input_shp, append_shape)
 if __name__ == '__main__':
     main()
