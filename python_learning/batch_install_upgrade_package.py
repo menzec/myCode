@@ -1,4 +1,3 @@
-# -*-coding: utf-8 -*-
 import platform
 import pip
 # pip V10.0.0以上版本需要导入下面的包
@@ -7,6 +6,7 @@ from subprocess import call
 from time import sleep
 import os
 import subprocess
+
 
 def platform_info():
     # ouput system type and version info
@@ -30,7 +30,7 @@ def platform_info():
     print("platform.uname()=%s", platform.uname())
 
 
-def pip_upgrade_package():
+def pip_upgrade_package()
     print('current platform system is %s' % (platform.system()))
     if str(platform.system()) == 'Windows':
         for dist in get_installed_distributions():
@@ -48,27 +48,26 @@ def python_install_package(packagefolder):
     packagelist = os.listdir(packagefolder)
     i = 0
     tem = len(packagelist)
-    num = (tem*tem + tem)/2 + 1
+    num = (tem * tem + tem) / 2 + 1
     if str(platform.system()) == 'Windows':
         while len(packagelist):
             if tem != len(packagelist):
-                num = (tem*tem + tem)/2 + 1
+                num = (tem * tem + tem) / 2 + 1
                 tem = len(packagelist)
                 i = 0
-            if i>num:
+            if i > num:
                 break
             i = i + 1
-            package_absdir = packagefolder + '/'+packagelist[0]
+            package_absdir = packagefolder + '/' + packagelist[0]
             if os.path.isfile(package_absdir):
-                if os.system(r'pip install '+package_absdir):
-                    print(r'pip install %s failed!'%packagelist[0])
+                if os.system(r'pip install ' + package_absdir):
+                    print(r'pip install %s failed!' % packagelist[0])
                     packagelist.append(packagelist[0])
                 else:
-                    print(r'pip install %s successeded!'%packagelist[0])
+                    print(r'pip install %s successeded!' % packagelist[0])
                 del packagelist[0]
-                print('len(packagelist): %d'%len(packagelist))
-  
-                
+                print('len(packagelist): %d' % len(packagelist))
+
             # else:
             #     # os.system(packagefolder[0]+':')
             #     print('%s/%s'%(packagefolder,package))

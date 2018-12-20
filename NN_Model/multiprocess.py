@@ -1,4 +1,3 @@
-# #!/usr/bin/env python
 # # -*- coding: utf-8 -*-
 # # @Date    : 2018-10-17 21:28:33
 # # @Author  : ${menzec} (${menzc@outlook.com})

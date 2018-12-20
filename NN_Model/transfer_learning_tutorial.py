@@ -87,7 +87,7 @@ if __name__ == '__main__':
         ]),
     }
 
-    data_dir = r'D:\data\hymenoptera_data'
+    data_dir = '~/mydata/data/hymenoptera_data'
     image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x),
                                               data_transforms[x])
                       for x in ['train', 'val']}
@@ -291,8 +291,9 @@ if __name__ == '__main__':
     # You can read more about this in the documentation
     # `here <http://pytorch.org/docs/notes/autograd.html#excluding-subgraphs-from-backward>`__.
     #
-
-    model_conv = torchvision.models.resnet18(pretrained=True)
+    MODELDIR = '/home/men/mydata/data/.torch/models/resnet18-5c106cde.pth'
+    model_conv = torchvision.models.resnet18(pretrained=False)
+    model_conv.load_state_dict(torch.load(MODELDIR))
     for param in model_conv.parameters():
         param.requires_grad = False
 

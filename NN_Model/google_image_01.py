@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # @Date    : 2018-10-06 12:59:14
 # @Author  : ${menzec} (${menzc@outlook.com})
@@ -29,8 +28,8 @@ import pdb
 # leve 2:39135.758
 # leve 3:19567.879
 # leve 4:9783.940
-# leve 5:4891.970
-# leve 6:2445.985
+# leve 5:4891.970get_proxy
+# leve 6:2445.985get_proxy
 # leve 7:1222.992
 # leve 8:611.496
 # leve 9:305.748

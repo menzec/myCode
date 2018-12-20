@@ -60,6 +60,7 @@ class getProxies(object):
 
 
 def main():
+    # 实例化对象
     prox = getProxies()
     headers = {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.62 Safari/537.36'}
@@ -67,7 +68,9 @@ def main():
     corr = 0
     temp = 0
     for i in range(500):
-        r = requests.get(testurl, headers=headers, proxies=prox.get_proxy())
+        # 调用生成代理函数
+        proxy = prox.get_proxy()
+        r = requests.get(testurl, headers=headers, proxies=proxy)
         if temp != prox.courrent_ip_list_num:
             temp = prox.courrent_ip_list_num
             print(len(prox.proxies_list))
@@ -76,6 +79,7 @@ def main():
             corr += 1
     print(corr)
 
-    
+
 if __name__ == '__main__':
+    # test founction
     main()

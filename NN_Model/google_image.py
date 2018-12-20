@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # @Date    : 2018-10-06 12:59:14
 # @Author  : ${menzec} (${menzc@outlook.com})
@@ -31,8 +30,8 @@ import string
 # 不同等级对应的分辨率
 # leve 0:156543.034
 # leve 1:78271.517
-# leve 2:39135.758
-# leve 3:19567.879
+# leve 2:39135.758Net_para
+# leve 3:19567.879Net_para
 # leve 4:9783.940
 # leve 5:4891.970
 # leve 6:2445.985
@@ -41,8 +40,8 @@ import string
 # leve 9:305.748
 # leve 10:152.874
 # leve 11:76.437
-# leve 12:38.219
-# leve 13:19.109
+# leve 12:38.219Net_para
+# leve 13:19.109Net_para
 # leve 14:9.555
 # leve 15:4.777
 # leve 16:2.389

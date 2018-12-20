@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # @Date    : 2018-09-17 21:02:51
 # @Author  : ${menzec} (${menzc@outlook.com})
@@ -74,8 +73,8 @@ def hymenoptera():
 
 if __name__ == '__main__':
 
-    # models.resnet18(pretrained=True)
+    models.resnet18(pretrained=True)
     # models.resnet50(pretrained=True)
     # models.resnet101(pretrained=True)
     # models.resnet152(pretrained=True)
-    models.densenet121(pretrained=True)
+    # models.densenet121(pretrained=True)

@@ -116,9 +116,50 @@
 #             line = fn.readline()
 #         print(i)
 #         print("结束")
-mystr = '我爱你中国'
-print(len(mystr))
-print(type(mystr))
-mystr_utf8 = mystr.encode(encoding='utf-8')
-print(len(mystr_utf8))
-print(type(mystr_utf8))
+# mystr = '我爱你中国'
+# print(len(mystr))
+# print(type(mystr))
+# mystr_utf8 = mystr.encode(encoding='utf-8')
+# print(len(mystr_utf8))
+# print(type(mystr_utf8))
+import requests
+from bs4 import BeautifulSoup
+import os
+import re
+import bs4
+s = requests.Session()
+url = 'https://baike.baidu.com/item/%E4%BC%8A%E9%80%9A%E7%81%AB%E5%B1%B1%E7%BE%A4%E5%9B%BD%E5%AE%B6%E7%BA%A7%E8%87%AA%E7%84%B6%E4%BF%9D%E6%8A%A4%E5%8C%BA/8758896'
+# Cookie  = 'BIDUPSID=B3F8382F59B7C5BAC977700953703BC1; PSTM=1510409949; BAIDUID=018D8A7A013359893B1066ABAE61853A:FG=1; __cfduid=d92ac5c0d7dea35057f395a9a7b2b2b951525274842; BDUSS=HdyTEpkekxMZzJINlA0LW0ybUh0ZmFVMDNFWjR0dTNPZ2xxaWltR0V3eXNVSHBiQVFBQUFBJCQAAAAAAAAAAAEAAADCr1J1u~rWx7XE5ue087TzAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKzDUlusw1JbN; delPer=0; pgv_pvi=4423961600; pgv_si=s4874264576; BDRCVFR[nnelRoIzZZm]=mk3SLVN4HKm; PSINO=1; MCITY=-%3A; BDRCVFR[dG2JNJb_ajR]=mk3SLVN4HKm; BDRCVFR[-pGxjrCMryR]=mk3SLVN4HKm; ZD_ENTRY=baidu; Hm_lvt_55b574651fcae74b0a9f1cf9c8d7c93a=1542679052,1542683848,1542698420,1542699539; Hm_lpvt_55b574651fcae74b0a9f1cf9c8d7c93a=1542699539; H_PS_PSSID=1441_21112_27509'
+# User_Agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36'
+# Referer = 'https://baike.baidu.com/item/%E4%B8%AD%E5%9B%BD%E8%87%AA%E7%84%B6%E4%BF%9D%E6%8A%A4%E5%8C%BA'
+# headers = {'Cookie':Cookie,'User-Agent':User_Agent,'Referer':Referer}
+s.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36'
+r = s.get(url)
+r.encoding = 'gbk2312'
+rawhtml = r.text
+soup = BeautifulSoup(rawhtml, 'html.parser')
+main = soup.find(attrs = {"class":"main-content"})
+
+
+
+
+if __name__ == '__main__':
+    num = -1
+    info = []
+    for i in range(len(main.contents)):
+        num+=1
+        div = main.contents[i]  
+        try:
+            if div.attrs['class'] == ['para-title', 'level-2']:
+                # print(i)
+                # print(num)
+                info.append(num)
+        except (KeyError,AttributeError) as err:
+            pass
+        print("num:%d---"%(i),div)
+        print(main.contents[num])
+        print(num,i)
+# print(info)
+# print(main.contents[info[0]])
+
+

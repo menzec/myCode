@@ -18,7 +18,7 @@ def create_choose_dict(xy_list, threshold, corr_index=1, sor_index=0):
     for xy in xy_list:
         corr = xy[corr_index][sor_index]
         area = xy[2]
-        if area < 0.1 or abs(corr) < abs(int(corr)) + threshold[0] or corr > abs(int(corr)) + threshold[1]:
+        if area < 0.01 or abs(corr) < abs(int(corr)) + threshold[0] or corr > abs(int(corr)) + threshold[1]:
             del_num += 1
             continue
         key = str(int(xy[corr_index][sor_index]))
@@ -51,12 +51,12 @@ def choose_num_list(dict_info, num):
     return num_list
 
 
-def random_get_feature(input_shp,out_name, get_num):
+def random_get_feature(input_shp,out_path,out_name, get_num):
     num = 0
     count = 0
     # create new shp
     # Set local variables
-    out_path = r"D:\NGCC\zheng\men"
+    out_path #= r"D:\NGCC\zheng\men"
     # out_name = "randomchoose.shp"
     geometry_type = "POLYGON"
     template = input_shp
@@ -81,7 +81,7 @@ def random_get_feature(input_shp,out_name, get_num):
         polygon_list.append(row)
     print('All: %d' % (len(polygon_list)))
     cor_dict = create_choose_dict(
-        polygon_list, (0.2, 0.8), corr_index=1, sor_index=0)
+        polygon_list, (0.01, 0.095), corr_index=1, sor_index=0)
     coor_list = choose_num_list(cor_dict, get_num)
     coor_list.sort(key=lambda item: item[0])
     print('coor_list:%d' % (len(coor_list)))
@@ -136,11 +136,12 @@ def select_feature_from_points(point_file, input_shp, append_shape):
 
 def main():
     print('main process')
-    input_shp = r'D:\NGCC\zheng\men\complete_within.shp'
+    input_shp = r'D:\NGCC\zheng\20181129\worldview-0.35\within_2019.shp'
+    outpath = r'D:\NGCC\zheng\20181129\worldview-0.35'
     out_name = 'target_527.shp'
-    append_file = r'D:\NGCC\zheng\men\append01.txt'
-    append_shape = r'D:\NGCC\zheng\men\randomchoose.shp'
-    # random_get_feature(input_shp,out_name, 800)
-    select_feature_from_points(append_file, input_shp, append_shape)
+    # append_file = r'D:\NGCC\zheng\men\append01.txt'
+    # append_shape = r'D:\NGCC\zheng\men\randomchoose.shp'
+    random_get_feature(input_shp,outpath,out_name, 750)
+    # select_feature_from_points(append_file, input_shp, append_shape)
 if __name__ == '__main__':
     main()
