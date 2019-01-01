@@ -1,10 +1,8 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # @Date    : 2018-09-02 13:59:22
 # @Author  : ${menzec} (${menzc@outlook.com})
 # @Link    : http://example.org
 # @Version : $Id$
-
 
 import os
 import sys
@@ -34,11 +32,11 @@ from models import *
 #     'myCifar10_All': [len(myDataset.myCifar10.label()), myDataset.myCifar10_All(datadir_list['cifar'], BATCH_SIZE).getdata()]
 # }
 
-BATCH_SIZE = 64
+BATCH_SIZE = 4
 LEARNING_RATE = 0.02
-ALL_EPOCH = 8
-MILESTONES = [2,4,6]
-MODELDIR = r'D:\data\Model\ResNet50_UCMerced\net_003.pth'
+ALL_EPOCH = 300
+MILESTONES = [50, 150, 200]
+MODELDIR = '/home/men/mydata/data/.torch/models/resnet50-19c8e357.pth'
 GAMMA = 0.2
 
 
@@ -46,12 +44,11 @@ def main():
     # 定义是否使用GPU
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print('device: ', device)
-    print(os.getcwd())
     datadir_list = {
-        'cifar10': r'D:\data\cifar10',
-        'UCMerced': r'D:\data\UCMerced'
+        'cifar10': '/home/men/mydata/data/cifar10/',
+        'UCMerced': '/home/men/mydata/data/UCMerced'
     }
-    modelrootdir = r'D:\data\Model\test'
+    modelrootdir = '/home/men/mydata/data/Models/test'
     data_infos = {
         #'cifar10': [len(myDataset.myCifar10.label()), myDataset.myCifar10(datadir_list["cifar10"], BATCH_SIZE).getdata()],
         'UCMerced': [myDataset.UCMerced.label(),
@@ -81,9 +78,10 @@ def main():
             # pretrained model
             # for param in net.parameters():
             #     param.requires_grad = False
-            num_ftrs = net.fc.in_features
-            net.fc = nn.Linear(num_ftrs, len(classes_label))
-            net.load_state_dict(torch.load(MODELDIR,map_location=device))
+            # net.load_state_dict(torch.load(MODELDIR))
+            # num_ftrs = net.fc.in_features
+            # net.fc = nn.Linear(num_ftrs, len(classes_label))
+            # net.load_state_dict(torch.load(MODELDIR)) #,map_location=device
             # optimizer = optim.SGD(
             # net.parameters(), lr=LEARNING_RATE, momentum=0.9,
             # weight_decay=5e-4)
@@ -97,11 +95,12 @@ def main():
             train_net.pre_check(net)
             for epoch in range(train_net.para.pre_epoch, train_net.para.epoch):
                 train_net.train(net, epoch)
-                train_net.test(net, epoch,classes_label)
+                train_net.test(net, epoch, classes_label)
             endtime = datetime.datetime.now()
             print('%d/%d  %s + %s Training Finished! Endtime:%s, costtime:%s' %
                   (i + 1, len(model_list), model_name, dataname, endtime,  endtime - startime))
         del model_list
 
 if __name__ == '__main__':
+    print('BATCH_SIZE = %d'%(BATCH_SIZE))
     main()

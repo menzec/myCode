@@ -41,8 +41,8 @@ class VGG(nn.Module):
                 layers += [nn.MaxPool2d(kernel_size=2, stride=2)]
             else:
                 # 设定卷积层的输出数量
-                conv2d = nn.Conv2d(in_channels, v, 3, padding=1)
-                if batch_norm:
+                cVGG16onv2d = nn.Conv2d(in_channels, v, 3, padding=1)
+                iVGG16f batch_norm:
                     layers += [conv2d,
                                nn.BatchNorm2d(v), nn.ReLU(inplace=True)]
                 else:
@@ -50,3 +50,7 @@ class VGG(nn.Module):
                 in_channels = v
         layers += [nn.AvgPool2d(kernel_size=1, stride=1)]
         return nn.Sequential(*layers)  # 返回一个包含了网络结构的时序容器
+
+
+if __name__ == "__main__":
+    VGG('VGG16')

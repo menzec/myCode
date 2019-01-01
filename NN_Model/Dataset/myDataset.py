@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # @Date    : 2018-08-29 15:48:33
 # @Author  : ${menzec} (${menzc@outlook.com})
@@ -15,7 +14,9 @@ import shutil
 
 
 def GetImageList(root, txtfilename, file_extensions):
-    '''将root目录下的对应file_extensions后缀名的文件名汇集在txtfilename文件中，每一类文件的文件名前的英文名称应该一致，仅仅是后面数字不一致,返回一个字典{'classname'：[label,count]}'''
+    ''' 将root目录下的对应file_extensions后缀名的文件名汇集在txtfilename文件中，
+        每一类文件的文件名前的英文名称应该一致，仅仅是后面数字不一致,
+        返回一个字典{'classname'：[label,count]}'''
     if root[-1] not in ['\\', '/']:
         root += ('/')
     categories = [[], [], []]
@@ -82,7 +83,7 @@ def CheckImage(root, filename_dataset, rows=256, cols=256):
 def RemoveBadImage(root, ImageList):
     if root[-1] not in ['\\', '/']:
         root += ('/')
-    errImageDir = root + 'errImage\\'
+    errImageDir = root + 'errImage/'
     if not os.path.exists(errImageDir):
         os.mkdir(errImageDir)
     for image_name in ImageList:
@@ -102,7 +103,7 @@ def divideTrTe(root, rate=0.8, file_extension=['.tif', '.jpg', '.bmp']):
     # errImageList.pop()
     # RemoveBadImage(root, errImageList)
     # print('delete not qualified image:%-6d' % (len(errImageList)))
-    all_image = GetImageList(root, 'list.txt', file_extension)
+    # all_image = GetImageList(root, 'list.txt', file_extension)
     print('image_count:', sum(all_image[2]))
     # 按照比例分为训练集和测试集
     train_fn = open(root + 'train.txt', 'w')
@@ -159,7 +160,7 @@ class hymenoptera():
         self.batch_size = BATCH_SIZE
 
     def getdata(self, pretrained=True):
-        if pretrained == True:
+        if pretrained:
             transform_train = transforms.Compose([
                 transforms.RandomResizedCrop(224),
                 transforms.RandomHorizontalFlip(),
